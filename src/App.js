@@ -16,7 +16,7 @@ function App() {
     let [resultQuery, setResultQuery] = useState([])
     const [questions, setQuestions]=useState(quests)
     const [step, setStep] = useState(0);
-    const [stepToDispay, setStepToDispay] = useState(0)
+    const [stepToDisplay, setStepToDisplay] = useState(0)
     useEffect(()=>{
         if(!document.getElementById('widget')){
             let style = document.createElement('link')
@@ -28,8 +28,8 @@ function App() {
     }, [])
 
     useEffect(() => {
-        console.log(step)
-        setStepToDispay(questions[step]?.step)
+        console.log('step ',step)
+        setStepToDisplay(questions[step - 1]?.step)
     }, [step])
 
     useEffect(()=>{
@@ -80,7 +80,7 @@ function App() {
 
   return (
     <div className="App">
-        <QuestionContext.Provider value={{resultQuery, onStepChange, step,onQuestionAsk}}>
+        <QuestionContext.Provider value={{resultQuery, onStepChange, step,onQuestionAsk,stepToDisplay}}>
             <Progress onStepChange={onStepChange} />
             {
                 step === 0 &&

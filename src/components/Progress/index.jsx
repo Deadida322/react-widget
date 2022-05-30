@@ -9,6 +9,7 @@ const maxStep = 10;
 export default function Progress({onStepChange}){
     const questionContext = useContext(QuestionContext)
     const step = questionContext.step
+    const stepToDisplay = questionContext.stepToDisplay
     const handleIncrement = (e) => {
         onStepChange(step + 1)
     }
@@ -31,7 +32,7 @@ export default function Progress({onStepChange}){
                 }
             </div>
             <div className={ step===0 ? 'd-none' : 'progress__counter'}>
-                {step}/{maxStep}
+                {stepToDisplay}/{maxStep}
             </div>
             <div className="progress__close">
                 {
