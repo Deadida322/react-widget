@@ -1,0 +1,18 @@
+@mixin fdc(){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin flex-center(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-sb(){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
