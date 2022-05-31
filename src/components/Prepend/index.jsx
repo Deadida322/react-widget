@@ -1,4 +1,4 @@
-import like from '../../static/img/like.svg'
+import like from '../../static/img/like.png'
 import {QuestionContext} from "../../context/QuestionContext";
 import {useContext, useEffect} from "react";
 export default function Prepend({prepend}){
