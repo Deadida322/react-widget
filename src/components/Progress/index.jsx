@@ -6,7 +6,7 @@ import ProgressLine from "../ProgressLine";
 import logo from '../../static/img/logo.png'
 const maxStep = 10;
 
-export default function Progress({onStepChange}){
+export default function Progress({onStepChange, onClose}){
     const questionContext = useContext(QuestionContext)
     const step = questionContext.step
     const stepToDisplay = questionContext.stepToDisplay
@@ -15,6 +15,9 @@ export default function Progress({onStepChange}){
     }
     const handleDecrement = (e) => {
         onStepChange(step - 1)
+    }
+    const handleClose = (e) => {
+        onClose()
     }
     return (
         <div className={`progress__wrap ${ step===0 ? 'progress__wrap_intro' : ''}`}>
@@ -34,7 +37,7 @@ export default function Progress({onStepChange}){
             <div className={ step===0 ||step === 16 ? 'd-none' : 'progress__counter'}>
                 {stepToDisplay}/{maxStep}
             </div>
-            <div className="progress__close">
+            <div className="progress__close" >
                 {
                     (step === 0) ?
                         (
@@ -46,6 +49,7 @@ export default function Progress({onStepChange}){
                         (
                             <Icon path={mdiClose }
                                   size={1}
+                                  onClick={handleClose}
                                   className='center curp'/>
                         )
                 }

@@ -42,12 +42,14 @@ const quests = [
                 {
                     type: 'col',
                     text: `Women's style`,
-                    img: woman
+                    img: woman,
+                    value: 5
                 },
                 {
                     type: 'col',
                     text: `Man's style`,
-                    img: man
+                    img: man,
+                    value: 4
                 }
             ],
             action:{
@@ -62,12 +64,14 @@ const quests = [
             {
                 type: 'col',
                 text: `Eyeglasses`,
-                img: mansGlasses1
+                img: mansGlasses1,
+                value: 210
             },
             {
                 type: 'col',
                 text: `Sunglasses`,
-                img: mansGlasses2
+                img: mansGlasses2,
+                value: 211
             }
         ],
         action:{
@@ -104,14 +108,17 @@ const quests = [
             {
                 type: 'col',
                 text: `Near Vision`,
+                value: 6
             },
             {
                 type: 'col',
                 text: `Distance Vision`,
+                value: 6
             },
             {
                 type: 'col',
                 text: `Multifocal / Progressive`,
+                value: 7
             },
         ],
         action:{
@@ -128,16 +135,19 @@ const quests = [
                 bold: '42-48мм',
                 type: 'col',
                 text: `Small`,
+                value: 68
             },
             {
                 bold: '49-53мм',
                 type: 'col',
                 text: `Medium`,
+                value: 67
             },
             {
                 type: 'col',
                 text: `Large`,
-                bold: '54-58мм'
+                bold: '54-58мм',
+                value: 66
             },
         ],
         action:{
@@ -156,14 +166,17 @@ const quests = [
             {
                 type: 'col',
                 text: `Wider Than Average`,
+                value: 66
             },
             {
                 type: 'col',
                 text: `Average`,
+                value: 67
             },
             {
                 type: 'col',
                 text: `Narrower Than Average`,
+                value: 68
             }
         ],
         action:{
@@ -178,10 +191,12 @@ const quests = [
             {
                 type: 'col',
                 text: `Yes`,
+                value: true
             },
             {
                 type: 'col',
                 text: `No`,
+                value: false
             }
         ]
     },
@@ -193,16 +208,19 @@ const quests = [
                 img: five1,
                 type: 'row',
                 text: `Dark Shade`,
+                value: 'dark'
             },
             {
                 img: five2,
                 type: 'row',
                 text: `Light Shade`,
+                value: 'light'
             },
             {
                 img: five3,
                 type: 'row',
                 text: `Transitioning Shade`,
+                value: 'transition'
             }
         ]
     },
@@ -214,16 +232,19 @@ const quests = [
                 img: six1,
                 type: 'row',
                 text: `I have a long face`,
+                value: 'long'
             },
             {
                 img: six2,
                 type: 'row',
                 text: `I have a round face`,
+                value: 'round'
             },
             {
                 img: six3,
                 type: 'row',
                 text: `In between`,
+                value: 'between'
             }
         ],
         action: {
@@ -238,15 +259,18 @@ const quests = [
             {
                 type: 'col',
                 text: `Sharp`,
+                value: 'sharp'
             },
             {
 
                 type: 'col',
                 text: `Rounded`,
+                value: 'rounded'
             },
             {
                 type: 'col',
                 text: `In between`,
+                value: 'between'
             }
         ],
         action: {
@@ -263,63 +287,75 @@ const quests = [
             {
                 type: 'col',
                 text: `Rectangle`,
-                img: rectangle
+                img: rectangle,
+                value: 'rectangle'
             },
             {
 
                 type: 'col',
                 text: `Browline`,
-                img: browline
+                img: browline,
+                value: 'browline'
             },
             {
                 type: 'col',
                 text: `Aviator`,
-                img: aviator
+                img: aviator,
+                value: 'aviator'
             },
             {
                 type: 'col',
                 text: `Geometric`,
-                img: geometric
+                img: geometric,
+                value: 'geometric'
             },
             {
                 type: 'col',
                 text: `Wayframe`,
-                img: wayframe
+                img: wayframe,
+                value: 'wayframe'
             },
             {
                 type: 'col',
                 text: `Round`,
-                img: rounded
+                img: rounded,
+                value: 'round'
             },
             {
                 type: 'col',
                 text: `Oval`,
-                img: oval
+                img: oval,
+                value: 'oval'
             },
             {
                 type: 'col',
                 text: `Oversized`,
-                img: oversized
+                img: oversized,
+                value: 'oversized'
             },
             {
                 type: 'col',
                 text: `Cat eye`,
-                img: cateye
+                img: cateye,
+                value: 'cat_eye'
             },
             {
                 type: 'col',
                 text: `Rimless`,
-                img: rimless
+                img: rimless,
+                value: 'rimless'
             },
             {
                 type: 'col',
                 text: `Square`,
-                img: square
+                img: square,
+                value: 'square'
             },
             {
                 type: 'col',
                 text: `Wrap`,
-                img: wrap
+                img: wrap,
+                value: 'wrap'
             }
         ],
         action: {
@@ -334,10 +370,12 @@ const quests = [
             {
                 type: 'col',
                 text: `Yes, I have some in mind`,
+                value: 10
             },
             {
                 type: 'col',
                 text: `No, brand isn't important`,
+                value: 11
             }
         ]
     },
@@ -351,74 +389,74 @@ const quests = [
                 type: 'col',
                 img: logo1,
                 textHidden: true,
-                text: 'RayBan'
+                value: 'ray_ban',
             },
             {
 
                 type: 'col',
                 img: logo2,
                 textHidden: true,
-                text: 'Oakley'
+                value: 'oakley'
             },
             {
                 type: 'col',
                 img: logo3,
                 textHidden: true,
-                text: 'Gucci'
+                value: 'gucci'
             },
             {
                 type: 'col',
                 img: logo4,
                 textHidden: true,
-                text: 'Armani exchange'
+                value: 'armani_exchange'
             },
             {
                 type: 'col',
                 img: logo5,
                 textHidden: true,
-                text: 'Hillary Duff'
+                value: 'hillary_duff'
             },
             {
                 type: 'col',
                 img: logo6,
                 textHidden: true,
-                text: 'Prada'
+                value: 'prada'
             },
             {
                 type: 'col',
                 img: logo7,
                 textHidden: true,
-                text: 'Versache'
+                value: 'versache'
             },
             {
                 type: 'col',
                 img: logo8,
                 textHidden: true,
-                text: 'Vogue'
+                value: 'vogue'
             },
             {
                 type: 'col',
                 img: logo9,
                 textHidden: true,
-                text: 'Michael Kors'
+                value: 'michael_kors'
             },
             {
                 type: 'col',
                 img: logo10,
                 textHidden: true,
-                text: 'Coach'
+                value: 'coach'
             },
             {
                 type: 'col',
                 img: logo11,
                 textHidden: true,
-                text: 'Tory burch'
+                value: 'tory_burch'
             },
             {
                 type: 'col',
                 img: logo12,
                 textHidden: true,
-                text: 'Burberry'
+                value: 'burberry'
             }
         ],
         action: {

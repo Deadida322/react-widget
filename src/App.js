@@ -81,7 +81,10 @@ function App() {
     function onStepChange(step){
         setStep(step)
     }
-
+    function onClose() {
+        setStep(0);
+        setResultQuery([]);
+    }
     function queryForming(){
         let result = {}
         for(let item of resultQuery){
@@ -114,7 +117,7 @@ function App() {
   return (
     <div className="App">
         <QuestionContext.Provider value={{resultQuery, onStepChange, step,onQuestionAsk,stepToDisplay}}>
-            <Progress onStepChange={onStepChange} />
+            <Progress onStepChange={onStepChange} onClose={onClose} />
             {
                 step === 0 &&
                 <Intro onStepChange={onStepChange}/>
