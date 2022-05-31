@@ -78,7 +78,12 @@ body{
   width: 100%;
   left: 0;
 }
-
+#glasses-quiz-widget {
+  height: 100%;
+}
+.App {
+  height: 100%;
+}
 .line{
   position: relative;
   overflow: hidden;
@@ -95,9 +100,16 @@ body{
   border-radius: 3px;
   width: 100%;
 }
+.question_wrap {
+  height: 91%;
+}
 .question_skip{
   cursor: pointer;
+  display: inline-block;
   text-decoration: underline;
+  justify-self: flex-end;
+  margin-top: auto;
+  margin-bottom: 24px;
 }
 .question{
 
@@ -112,6 +124,7 @@ body{
   background: $bg_primary;
   width: 100%;
   @include fdc();
+  justify-content: start;
   .question__subtitle{
     max-width: 90%;
     color: $text_secondary;
@@ -121,10 +134,10 @@ body{
     font-weight: 400;
   }
   .question__title{
-    max-width: 90%;
+    max-width: 95%;
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 24px;
     font-size: 20px;
     font-family: 'Open Sans';
     font-weight: 300;
@@ -139,7 +152,10 @@ body{
 .element::-webkit-scrollbar { width: 0; }
 .variants_scroll { -ms-overflow-style: none; }
 
-.variants_scroll { overflow: -moz-scrollbars-none; }
+.variants_scroll { 
+  overflow: -moz-scrollbars-none; 
+  min-width: 70%;
+}
 .variants__wrapper{
   @include fdc();
   .variant_item{
@@ -167,11 +183,12 @@ body{
     min-width: 100%;
     background-color: white;
   }
+  
 }
 .intro__wrapper {
   @include fdc();
   text-align: center;
-  padding: 70px 25px;
+  padding: 70px 24px;
 }
 .intro__header {
   font-family: "Open Sans";

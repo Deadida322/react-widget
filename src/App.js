@@ -123,9 +123,10 @@ function App() {
             }
             {
                 questions.map((item, key)=>(
-                        <div key={key}>
-                            { key+1===step && <Question question={item}/>}
-                        </div>
+                        key+1 === step &&
+                            <div className="question_wrap" key={key}>
+                                <Question question={item}/>
+                            </div>
                     )
                 )
             }
