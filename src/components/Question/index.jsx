@@ -9,19 +9,19 @@ export default function Question({question}){
     const [answer, setAnswer] = useState([])
     const handleContinue = () => {
         questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.step+1,
+            step: questionContext.stepToDisplay,
             value: answer
         })
     }
     const handleBoth = () => {
         questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.step+1,
+            step: questionContext.stepToDisplay,
             value: ['both']
         })
     }
     const handleSkip = () => {
         questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.step+1,
+            step: questionContext.stepToDisplay,
             value: ['skip']
         })
     }

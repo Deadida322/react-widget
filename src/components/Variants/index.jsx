@@ -21,8 +21,8 @@ export default function Variants({variants, isMultiple, onVariantCheck}){
             questionContext.onQuestionAsk(
                 questionContext.step+1,
                 {
-                    step: questionContext.step+1,
-                    value: answer
+                    step: questionContext.stepToDisplay,
+                    value: newAnswer
                 }
             )
         }

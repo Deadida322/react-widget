@@ -13,7 +13,8 @@ import womansGlasses1 from './static/img/glasses_woman1.svg'
 import womansGlasses2 from './static/img/glasses_woman2.svg'
 
 function App() {
-    let [resultQuery, setResultQuery] = useState([])
+    const formedQuery = ''
+    const [resultQuery, setResultQuery] = useState([])
     const [questions, setQuestions]=useState(quests)
     const [step, setStep] = useState(0);
     let isSkipped = false
@@ -29,7 +30,6 @@ function App() {
     }, [])
 
     useEffect(() => {
-        // console.log('step ',step)
         setStepToDisplay(questions[step - 1]?.step)
     }, [step])
 
@@ -67,21 +67,43 @@ function App() {
                 }
             ]
         }
-        if(resultQuery[4] && resultQuery[4].value[0] !== 'skipp') {
+        if(resultQuery[4] &&step ===7) {
+            console.log(step)
             if (resultQuery[4]?.value[0] !== 'skip') {
                 onStepChange(step + 2)
-                resultQuery[4].value[0] = 'skipp'
-
             }
-
         }
         setQuestions([...newQuestions])
-        console.log('questionsNow ', questions)
-        console.log('newQuestionsNow ', newQuestions)
+        setResultQuery(resultQuery)
+        queryForming()
     }, [resultQuery])
 
     function onStepChange(step){
         setStep(step)
+    }
+
+    function queryForming(){
+        let result = {}
+        for(let item of resultQuery){
+            if (result[item.step]){
+                if(!result[item.step].includes(item.value.join())){
+                    result[item.step].push(item.value.join())
+                }
+            }else{
+                result[item.step] = item.value
+            }
+        }
+        let stringToDisplay = ''
+
+        for(let key of Object.keys(result)){
+            if(
+                !(result[key].join(',').replaceAll('skip', '') === '' ||
+                (result[key].join(',').replaceAll('skip', '') === ','))
+            ){
+                stringToDisplay+=`screen_${key}=${result[key].join(',').replaceAll('skip','')}&`
+            }
+        }
+        console.log(stringToDisplay.slice(0,-1))
     }
 
     function onQuestionAsk(step, value){
