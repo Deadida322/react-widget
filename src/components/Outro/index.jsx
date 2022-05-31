@@ -4,18 +4,18 @@ export default function Intro({onStepChange}) {
         onStepChange(1)
     }
     return (
-        <div className="intro__wrapper">
+        <div className="outro__wrapper">
             <div className="prepend__img">
                 <img src={gift}/>
 
             </div>
-            <div className="intro__header">
+            <div className="outro__header">
                 We've found some awesome frames for you!
             </div>
-            <div className="intro__text">
+            <div className="outro__text">
                 Send the results to your email to receive special discounts.
             </div>
-            <button onClick={handleClick} className="intro__btn">
+            <button onClick={handleClick} className="outro__btn">
                 Send
             </button>
             <div className="text_prompt">

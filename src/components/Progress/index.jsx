@@ -17,7 +17,7 @@ export default function Progress({onStepChange}){
         onStepChange(step - 1)
     }
     return (
-        <div className="progress__wrap">
+        <div className={`progress__wrap ${ step===0 ? 'progress__wrap_intro' : ''}`}>
             <div className="progress__back">
                 {
                     (step === 0 || step ===16) ? (
@@ -50,9 +50,14 @@ export default function Progress({onStepChange}){
                         )
                 }
             </div>
-            <div className="line_wrapper">
-                <ProgressLine step={stepToDisplay} maxStep={maxStep}/>
-            </div>
+            
+                {
+                    step !== 0 && 
+                    <div className="line_wrapper">
+                        <ProgressLine step={stepToDisplay} maxStep={maxStep}/>
+                    </div>
+                }
+            
         </div>
     )
 }
