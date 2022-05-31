@@ -1,6 +1,9 @@
 @import "font";
 @import "variables";
 @import "mixins";
+*{
+  box-sizing: border-box;
+}
 body{
   font-family: 'Open Sans';
 }
@@ -47,8 +50,24 @@ body{
 .mx-auto{
   margin: 0 auto;
 }
+.check_icon{
+  display: none;
+}
 .selected{
-  border: 1px solid $primary;
+  position: relative;
+  .check_icon{
+    color: white;
+    z-index: 999999999999;
+    display: block !important;
+    position: absolute;
+    padding: 4px;
+    background: $primary;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    transform: translate(30%, -50%) scale(.8);
+  }
+  border: 1px solid $primary !important;
 }
 .progress__logo{
   height: 30px;
@@ -76,8 +95,12 @@ body{
   border-radius: 3px;
   width: 100%;
 }
-
+.question_skip{
+  cursor: pointer;
+  text-decoration: underline;
+}
 .question{
+
   .question__image{
     @include fdc();
     img{
@@ -89,6 +112,14 @@ body{
   background: $bg_primary;
   width: 100%;
   @include fdc();
+  .question__subtitle{
+    max-width: 90%;
+    color: $text_secondary;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+  }
   .question__title{
     max-width: 90%;
     text-align: center;
@@ -100,6 +131,15 @@ body{
   }
 }
 
+.variants_scroll{
+  overflow-x: scroll;
+}
+.variants_scroll::-webkit-scrollbar { width: 0; }
+/* хром, сафари */
+.element::-webkit-scrollbar { width: 0; }
+.variants_scroll { -ms-overflow-style: none; }
+
+.variants_scroll { overflow: -moz-scrollbars-none; }
 .variants__wrapper{
   @include fdc();
   .variant_item{
@@ -210,6 +250,26 @@ body{
   padding-left: 4px;
 }
 
+.variants_multiple{
+  display: flex;
+  flex-wrap: wrap !important;
+  width: 200%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  .variant_item{
+    min-width: auto;
+    width: 19% !important;
+  }
+}
+.intro__btn{
+  text-decoration: none !important;
+}
+.btn--disabled{
+  pointer-events: none;
+  cursor: none;
+  background: #DEDEDE;
+}
 
 
 

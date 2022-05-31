@@ -16,7 +16,8 @@ function App() {
     let [resultQuery, setResultQuery] = useState([])
     const [questions, setQuestions]=useState(quests)
     const [step, setStep] = useState(0);
-    const [stepToDisplay, setStepToDisplay] = useState(0)
+    let isSkipped = false
+    const [stepToDisplay, setStepToDisplay] = useState()
     useEffect(()=>{
         if(!document.getElementById('widget')){
             let style = document.createElement('link')
@@ -28,11 +29,12 @@ function App() {
     }, [])
 
     useEffect(() => {
-        console.log('step ',step)
+        // console.log('step ',step)
         setStepToDisplay(questions[step - 1]?.step)
     }, [step])
 
     useEffect(()=>{
+        console.log(resultQuery)
         if(resultQuery[0]?.value.join() === 'Women\'s style'){
             let newQuestions = [...questions]
             newQuestions[1].variants = [
@@ -63,7 +65,42 @@ function App() {
                     img: ovalWoman3
                 }
             ]
+        }
+        if(resultQuery[4]?.value[0] === 'skip' && !isSkipped){
+            console.log('fuf fuf')
+            resultQuery[4].value[0] = 'skiыp'
+            let newQuestions = [...questions]
+            newQuestions = [...newQuestions.slice(0,4),
+                {
+                    step: 4,
+                    prepend: `No worries, we’ve got you!`
+                },
+                {
+                    step: 4,
+                    title: `How wide would you say your face is?`,
+                    variants: [
+                        {
+                            type: 'col',
+                            text: `Wider Than Average`,
+                        },
+                        {
+                            type: 'col',
+                            text: `Average`,
+                        },
+                        {
+                            type: 'col',
+                            text: `Narrower Than Average`,
+                        }
+                    ],
+                    action:{
+                        type: 'both',
+                        text: 'I want to see both'
+                    }
+                },
+                ...newQuestions.slice(4, newQuestions.length)
+            ]
             setQuestions([...newQuestions])
+            console.log(newQuestions)
         }
     }, [resultQuery])
 
@@ -74,9 +111,7 @@ function App() {
     function onQuestionAsk(step, value){
         setStep(step)
         setResultQuery([...resultQuery, value])
-        console.log(resultQuery[step])
     }
-
 
   return (
     <div className="App">
