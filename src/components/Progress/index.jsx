@@ -20,7 +20,7 @@ export default function Progress({onStepChange}){
         <div className="progress__wrap">
             <div className="progress__back">
                 {
-                    (step === 0) ? (
+                    (step === 0 || step ===16) ? (
                             <img className="progress__logo" src={logo} alt=""/>
                         ) :
                         (
@@ -31,7 +31,7 @@ export default function Progress({onStepChange}){
                         )
                 }
             </div>
-            <div className={ step===0 ? 'd-none' : 'progress__counter'}>
+            <div className={ step===0 ||step === 16 ? 'd-none' : 'progress__counter'}>
                 {stepToDisplay}/{maxStep}
             </div>
             <div className="progress__close">
