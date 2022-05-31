@@ -97,7 +97,7 @@ function App() {
         if(!document.getElementById('widget')){
             let style = document.createElement('link')
             style.id = 'widget'
-            style.href = './style.css'
+            style.href = 'https://deadida322.github.io/react-widget/static/css/main.css'
             style.rel = 'stylesheet'
             document.querySelector('head').appendChild(style)
         }
