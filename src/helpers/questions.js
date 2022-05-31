@@ -53,7 +53,7 @@ const quests = [
                 }
             ],
             action:{
-                type: 'both',
+                type: 'skip',
                 text: 'I\'d like to see both'
             }
         },
@@ -75,7 +75,7 @@ const quests = [
             }
         ],
         action:{
-            type: 'both',
+            type: 'skip',
             text: 'I want to see both'
         }
     },
@@ -90,10 +90,12 @@ const quests = [
             {
                 type: 'col',
                 text: `yes`,
+                value: 'next'
             },
             {
                 type: 'col',
                 text: `no`,
+                value: 'skip'
             }
         ],
         action:{

@@ -4,7 +4,7 @@ import Icon from "@mdi/react";
 
 export default function VariantItem({variant, onQuestionAsk, className}){
     function handleClick(e){
-        onQuestionAsk(variant.text)
+        onQuestionAsk(variant.value)
     }
     return(
         <div onClick={handleClick} className={`variant_item curp ${className}`}>

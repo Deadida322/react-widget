@@ -31,13 +31,19 @@ function App() {
 
     useEffect(() => {
         setStepToDisplay(questions[step - 1]?.step)
+       
     }, [step])
 
+    useEffect(() => {
+        setResultQuery(resultQuery.filter(item => item.step !== step))
+    }, [stepToDisplay, step, resultQuery])
+
     useEffect(()=>{
+        
         console.log(resultQuery)
         let newQuestions = [...questions]
 
-        if(resultQuery[0]?.value.join() === 'Women\'s style'){
+        if(resultQuery[0]?.value.join() === '5'){
             newQuestions[1].variants = [
                 {
                     type: 'col',
@@ -73,13 +79,32 @@ function App() {
                 onStepChange(step + 2)
             }
         }
+
+        if(resultQuery[2] && step ===5) {
+            
+            if (resultQuery[2]?.value.join().includes('skip')) {
+                // onStepChange(questions.findIndex(item => item.step === questions[step - 2].step + 1))
+                onStepChange(step + 1)
+            }
+            else if (resultQuery[2]?.value.join().includes('next')) {
+                console.log('3 next')
+            }
+        }
+        // if(resultQuery[4] &&step ===7) {
+        //     console.log(step)
+        //     if (resultQuery[4]?.value[0] !== 'skip') {
+        //         onStepChange(step + 2)
+        //     }
+        // }
         setQuestions([...newQuestions])
         setResultQuery(resultQuery)
         queryForming()
     }, [resultQuery])
 
     function onStepChange(step){
+        // console.log('MJCDKJKDCKNCDKJNCNKJCDKNCDK');
         setStep(step)
+        
     }
     function onClose() {
         setStep(0);
