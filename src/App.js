@@ -129,12 +129,12 @@ function App() {
                 }else if(answers[2]?.join() == 211){
                     resultString = resultString.replace('screen_5', 'shade')
                 }
-                setQuery(ref+resultString.slice(0,-1))
+                setQuery(resultString.slice(0,-1))
             }
         }
     }
     function final(){
-        console.log(query)
+        console.log(document.getElementById('glasses-quiz-widget').getAttribute('data-source')+query)
     }
   return (
     <div className="App">
