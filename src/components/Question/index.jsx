@@ -26,10 +26,8 @@ export default function Question({question}){
         })
     }
     const handleCheck = (ans) => {
-        console.log(ans)
         let newAnswer = [...ans]
         setAnswer(newAnswer)
-        console.log(answer)
         if(ans.length){
             setCheckAnswer(true)
         }else{

@@ -7,13 +7,11 @@ export default function Variants({variants, isMultiple, onVariantCheck}){
     const questionContext = useContext(QuestionContext)
     useEffect(()=>{
         onVariantCheck(answer)
-        console.log(answer)
     },
     [answer])
     function onVariantPush(e){
         let newAnswer = [...answer]
         if(newAnswer.includes(e)){
-            console.log('тута')
             newAnswer.splice(newAnswer.findIndex(item=>item===e), 1)
         }else{
             newAnswer.push(e)

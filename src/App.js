@@ -8,7 +8,7 @@ import ovalWoman3 from './static/img/ovalWoman3.svg'
 import Question from "./components/Question";
 import {QuestionContext} from "./context/QuestionContext";
 import Intro from "./components/Intro";
-
+import Outro from './components/Outro'
 import womansGlasses1 from './static/img/glasses_woman1.svg'
 import womansGlasses2 from './static/img/glasses_woman2.svg'
 
@@ -35,8 +35,9 @@ function App() {
 
     useEffect(()=>{
         console.log(resultQuery)
+        let newQuestions = [...questions]
+
         if(resultQuery[0]?.value.join() === 'Women\'s style'){
-            let newQuestions = [...questions]
             newQuestions[1].variants = [
                 {
                     type: 'col',
@@ -66,42 +67,17 @@ function App() {
                 }
             ]
         }
-        if(resultQuery[4]?.value[0] === 'skip' && !isSkipped){
-            console.log('fuf fuf')
-            resultQuery[4].value[0] = 'skiыp'
-            let newQuestions = [...questions]
-            newQuestions = [...newQuestions.slice(0,4),
-                {
-                    step: 4,
-                    prepend: `No worries, we’ve got you!`
-                },
-                {
-                    step: 4,
-                    title: `How wide would you say your face is?`,
-                    variants: [
-                        {
-                            type: 'col',
-                            text: `Wider Than Average`,
-                        },
-                        {
-                            type: 'col',
-                            text: `Average`,
-                        },
-                        {
-                            type: 'col',
-                            text: `Narrower Than Average`,
-                        }
-                    ],
-                    action:{
-                        type: 'both',
-                        text: 'I want to see both'
-                    }
-                },
-                ...newQuestions.slice(4, newQuestions.length)
-            ]
-            setQuestions([...newQuestions])
-            console.log(newQuestions)
+        if(resultQuery[4] && resultQuery[4].value[0] !== 'skipp') {
+            if (resultQuery[4]?.value[0] !== 'skip') {
+                onStepChange(step + 2)
+                resultQuery[4].value[0] = 'skipp'
+
+            }
+
         }
+        setQuestions([...newQuestions])
+        console.log('questionsNow ', questions)
+        console.log('newQuestionsNow ', newQuestions)
     }, [resultQuery])
 
     function onStepChange(step){
@@ -129,6 +105,10 @@ function App() {
                             </div>
                     )
                 )
+            }
+            {
+                step === 16 &&
+                <Outro onStepChange={onStepChange}/>
             }
         </QuestionContext.Provider>
     </div>

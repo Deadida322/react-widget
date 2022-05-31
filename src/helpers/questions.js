@@ -146,6 +146,32 @@ const quests = [
         }
     },
     {
+        step: 4,
+        prepend: `No worries, we’ve got you!`
+    },
+    {
+        step: 4,
+        title: `How wide would you say your face is?`,
+        variants: [
+            {
+                type: 'col',
+                text: `Wider Than Average`,
+            },
+            {
+                type: 'col',
+                text: `Average`,
+            },
+            {
+                type: 'col',
+                text: `Narrower Than Average`,
+            }
+        ],
+        action:{
+            type: 'both',
+            text: 'I want to see both'
+        }
+    },
+    {
         step: 5,
         title: 'Would you like to protect your eyes from light emanating from screens?',
         variants: [
