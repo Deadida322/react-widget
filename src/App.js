@@ -1,24 +1,98 @@
 import {useEffect, useState} from "react";
 import Progress from './components/Progress/index'
 import quests from "./helpers/questions";
-
-import ovalWoman1 from './static/img/ovalWoman1.svg'
-import ovalWoman2 from './static/img/ovalWoman2.svg'
-import ovalWoman3 from './static/img/ovalWoman3.svg'
 import Question from "./components/Question";
 import {QuestionContext} from "./context/QuestionContext";
 import Intro from "./components/Intro";
 import Outro from './components/Outro'
-import womansGlasses1 from './static/img/glasses_woman1.svg'
-import womansGlasses2 from './static/img/glasses_woman2.svg'
+
+
 
 function App() {
-    const formedQuery = ''
+    let [ref, setRef] = useState('')
+    let [query, setQuery] = useState('')
+    let [loading, setLoading] = useState(false)
+    let [answers, setAnswers] = useState([])
+    let [external, setExternal] = useState(0)
+    let [internal, setInternal] = useState(0)
     const [resultQuery, setResultQuery] = useState([])
     const [questions, setQuestions]=useState(quests)
-    const [step, setStep] = useState(0);
-    let isSkipped = false
-    const [stepToDisplay, setStepToDisplay] = useState()
+
+    function onStepChange(){
+
+    }
+    function onExternalChange(i){
+        setExternal(i)
+    }
+    function onInternalChange(i){
+        setInternal(i)
+    }
+    function onQuestionAsk(goTo, answer){
+        let newAnswers = [...answers]
+        newAnswers[external] = answer
+        if(newAnswers[1]?.join() == 'skip'){ /// проверка на два пола
+            let newQuestions = [...questions]
+            for (let item of newQuestions[4][0].variants){
+                item.goTo = [6,2]
+            }
+            for (let item of newQuestions[4][1].variants){
+                item.goTo = [6,2]
+            }
+            setQuestions(newQuestions)
+        }
+        if(newAnswers[1]?.join() == 4){ //на мужика
+            let newQuestions = [...questions]
+            for (let item of newQuestions[4][0].variants){
+                item.goTo = [6,0]
+            }
+            for (let item of newQuestions[4][1].variants){
+                item.goTo = [6,0]
+            }
+            setQuestions(newQuestions)
+        }
+        if(newAnswers[1]?.join() == 5){ //на бабу
+            let newQuestions = [...questions]
+            for (let item of newQuestions[4][0].variants){
+                item.goTo = [6,1]
+            }
+            for (let item of newQuestions[4][1].variants){
+                item.goTo = [6,1]
+            }
+            setQuestions(newQuestions)
+        }
+        if(newAnswers[2]?.join() == 210){ //eyeglasses
+            let newQuestions = [...questions]
+            for (let item of newQuestions[3][0].variants){
+                item.goTo = [5,0]
+            }
+            for (let item of newQuestions[3][2].variants){
+                item.goTo = [5,0]
+            }
+            setQuestions(newQuestions)
+        }
+        else if (newAnswers[2]?.join() == 211){
+            let newQuestions = [...questions]
+            for (let item of newQuestions[3][0].variants){
+                item.goTo = [5,1]
+            }
+            for (let item of newQuestions[3][2].variants){
+                item.goTo = [5,1]
+            }
+            setQuestions(newQuestions)
+        }
+        setAnswers(newAnswers)
+        external = goTo[0]
+        internal = goTo[1]
+        setExternal(goTo[0])
+        setInternal(goTo[1])
+    }
+    function onClose(){
+        setExternal(0)
+    }
+    useEffect(()=>{
+        queryForming()
+    }, [answers])
+
     useEffect(()=>{
         if(!document.getElementById('widget')){
             let style = document.createElement('link')
@@ -27,138 +101,65 @@ function App() {
             style.rel = 'stylesheet'
             document.querySelector('head').appendChild(style)
         }
+        else {
+            setRef(document.getElementById('glasses-quiz-widget').getAttribute('data-source'))
+        }
     }, [])
 
-    useEffect(() => {
-        setStepToDisplay(questions[step - 1]?.step)
-       
-    }, [step])
-
-    useEffect(() => {
-        setResultQuery(resultQuery.filter(item => item.step !== step))
-    }, [stepToDisplay, step, resultQuery])
-
-    useEffect(()=>{
-        
-        console.log(resultQuery)
-        let newQuestions = [...questions]
-
-        if(resultQuery[0]?.value.join() === '5'){
-            newQuestions[1].variants = [
-                {
-                    type: 'col',
-                    text: `Eyeglasses`,
-                    img: womansGlasses1
-                },
-                {
-                    type: 'col',
-                    text: `Sunglasses`,
-                    img: womansGlasses2
-                }]
-            newQuestions[8].variants = [
-                {
-                    type: 'row',
-                    text: `I have a long face`,
-                    img: ovalWoman1
-                },
-                {
-                    type: 'row',
-                    text: `I have a round face`,
-                    img: ovalWoman2
-                },
-                {
-                    type: 'row',
-                    text: `In between`,
-                    img: ovalWoman3
-                }
-            ]
-        }
-        if(resultQuery[4] &&step ===7) {
-            console.log(step)
-            if (resultQuery[4]?.value[0] !== 'skip') {
-                onStepChange(step + 2)
-            }
-        }
-
-        if(resultQuery[2] && step ===5) {
-            
-            if (resultQuery[2]?.value.join().includes('skip')) {
-                // onStepChange(questions.findIndex(item => item.step === questions[step - 2].step + 1))
-                onStepChange(step + 1)
-            }
-            else if (resultQuery[2]?.value.join().includes('next')) {
-                console.log('3 next')
-            }
-        }
-        // if(resultQuery[4] &&step ===7) {
-        //     console.log(step)
-        //     if (resultQuery[4]?.value[0] !== 'skip') {
-        //         onStepChange(step + 2)
-        //     }
-        // }
-        setQuestions([...newQuestions])
-        setResultQuery(resultQuery)
-        queryForming()
-    }, [resultQuery])
-
-    function onStepChange(step){
-        // console.log('MJCDKJKDCKNCDKJNCNKJCDKNCDK');
-        setStep(step)
-        
-    }
-    function onClose() {
-        setStep(0);
-        setResultQuery([]);
-    }
     function queryForming(){
-        let result = {}
-        for(let item of resultQuery){
-            if (result[item.step]){
-                if(!result[item.step].includes(item.value.join())){
-                    result[item.step].push(item.value.join())
+        let resultString = ''
+        for (let i in answers){
+            if(answers[i]){
+                if(answers[i].join(',').replaceAll('skip', '')){
+                    resultString+=`screen_${i}=${answers[i].join(',')}&`
                 }
-            }else{
-                result[item.step] = item.value
+                resultString = resultString
+                    .replace('screen_10', 'brand')
+                    .replace('screen_1', 'gender')
+                    .replace('screen_2', 'eyewear_type')
+                    .replace('screen_3', 'lenstype')
+                    .replace('screen_4', 'frame_size')
+                    .replace('screen_6', 'face_shape')
+                    .replace('screen_7', 'facial_features')
+                    .replace('screen_8', 'shape')
+
+
+                if(answers[2]?.join() == 210){
+                    resultString = resultString.replace('screen_5', 'blue_light')
+                }else if(answers[2]?.join() == 211){
+                    resultString = resultString.replace('screen_5', 'shade')
+                }
+                setQuery(ref+resultString.slice(0,-1))
             }
         }
-        let stringToDisplay = ''
-
-        for(let key of Object.keys(result)){
-            if(
-                !(result[key].join(',').replaceAll('skip', '') === '' ||
-                (result[key].join(',').replaceAll('skip', '') === ','))
-            ){
-                stringToDisplay+=`screen_${key}=${result[key].join(',').replaceAll('skip','')}&`
-            }
-        }
-        console.log(stringToDisplay.slice(0,-1))
     }
-
-    function onQuestionAsk(step, value){
-        setStep(step)
-        setResultQuery([...resultQuery, value])
+    function final(){
+        console.log(query)
     }
-
   return (
     <div className="App">
-        <QuestionContext.Provider value={{resultQuery, onStepChange, step,onQuestionAsk,stepToDisplay}}>
+        <QuestionContext.Provider value={{resultQuery, onQuestionAsk, onStepChange, loading, setLoading, external, internal, onExternalChange, onInternalChange}}>
             <Progress onStepChange={onStepChange} onClose={onClose} />
             {
-                step === 0 &&
-                <Intro onStepChange={onStepChange}/>
+                external === 0 &&
+                <Intro onExternalChange={onExternalChange}/>
             }
+
             {
-                questions.map((item, key)=>(
-                        key+1 === step &&
-                            <div className="question_wrap" key={key}>
-                                <Question question={item}/>
+                questions.map((i, key)=>(
+                    i.map((j, jey)=>(
+                        external-1 === key && internal === jey &&
+                            <div key={jey} className={`question_wrapper`}>
+                                <Question question={j}/>
                             </div>
-                    )
+                        )
+                    ))
                 )
             }
+
             {
-                step === 16 &&
-                <Outro onStepChange={onStepChange}/>
+                external === 11 &&
+                <Outro onStepChange={onStepChange} final={final}/>
             }
         </QuestionContext.Provider>
     </div>

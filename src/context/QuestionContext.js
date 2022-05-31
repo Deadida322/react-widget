@@ -4,5 +4,11 @@ export const QuestionContext = createContext({
     step: 0,
     stepToDisplay: 0,
     onStepChange: ()=>{},
-    onQuestionAsk: ()=>{}
+    loading: false,
+    setLoading: ()=>{},
+    onQuestionAsk: ()=>{},
+    internal: 0,
+    external: 0,
+    onExternalChange: ()=> {},
+    onInternalChange: ()=> {},
 })

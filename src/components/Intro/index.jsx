@@ -1,7 +1,7 @@
 import firstGlasses from '../../static/img/firstGlasses.png'
-export default function Intro({onStepChange}) {
+export default function Intro({onExternalChange}) {
     function handleClick(){
-        onStepChange(1)
+        onExternalChange(1)
     }
     return (
         <div className="intro__wrapper">

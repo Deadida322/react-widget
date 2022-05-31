@@ -8,22 +8,13 @@ export default function Question({question}){
     const [checkAnswer, setCheckAnswer] = useState(false)
     const [answer, setAnswer] = useState([])
     const handleContinue = () => {
-        questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.stepToDisplay,
-            value: answer
-        })
+        questionContext.onQuestionAsk(question.action.goTo, answer)
     }
     const handleBoth = () => {
-        questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.stepToDisplay,
-            value: ['both']
-        })
+        questionContext.onQuestionAsk(question.action.goTo, ['both'])
     }
     const handleSkip = () => {
-        questionContext.onQuestionAsk(questionContext.step+1, {
-            step: questionContext.stepToDisplay,
-            value: ['skip']
-        })
+        questionContext.onQuestionAsk(question.action.goTo, ['skip'])
     }
     const handleCheck = (ans) => {
         let newAnswer = [...ans]
@@ -79,7 +70,7 @@ export default function Question({question}){
                 !question.prepend ?
                 <Variants onVariantCheck={handleCheck} isMultiple={question.isMultiple} variants={question.variants}/>
                     :
-                <Prepend prepend={question.prepend}/>
+                <Prepend prepend={question}/>
             }
             {
                getType(question?.action)

@@ -108,6 +108,9 @@ body{
 .question_wrap {
   height: 91%;
 }
+.question_wrapper {
+  height: 91% !important;
+}
 .question_skip{
   cursor: pointer;
   display: inline-block;
@@ -339,6 +342,10 @@ body{
   padding: 13px 48px;
   border-radius: $br_btn;
   cursor: pointer;
+}
+.no-actions{
+  opacity: 0.6 !important;
+  pointer-events: none;
 }
 
 

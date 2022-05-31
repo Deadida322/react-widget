@@ -1,7 +1,7 @@
 import gift from '../../static/img/gift.png'
-export default function Intro({onStepChange}) {
+export default function Intro({onStepChange, final}) {
     function handleClick(){
-        onStepChange(1)
+        final()
     }
     return (
         <div className="outro__wrapper">

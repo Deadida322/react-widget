@@ -11,19 +11,18 @@ export default function Variants({variants, isMultiple, onVariantCheck}){
     [answer])
     function onVariantPush(e){
         let newAnswer = [...answer]
-        if(newAnswer.includes(e)){
-            newAnswer.splice(newAnswer.findIndex(item=>item===e), 1)
+        if(!isMultiple) newAnswer = []
+
+        if(newAnswer.includes(e.value)){
+            newAnswer.splice(newAnswer.findIndex(item=>item===e.value), 1)
         }else{
-            newAnswer.push(e)
+            newAnswer.push(e.value)
         }
         setAnswer(newAnswer)
         if(!isMultiple){
             questionContext.onQuestionAsk(
-                questionContext.step+1,
-                {
-                    step: questionContext.stepToDisplay,
-                    value: newAnswer
-                }
+                e.goTo,
+                newAnswer
             )
         }
     }
