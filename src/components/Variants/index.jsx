@@ -3,12 +3,35 @@ import {QuestionContext} from "../../context/QuestionContext";
 import {useContext, useEffect, useRef, useState} from "react";
 
 export default function Variants({variants, isMultiple, onVariantCheck}){
+    let initTouch = 0
     const [answer, setAnswer] = useState([])
     const questionContext = useContext(QuestionContext)
+    function makeScroll(e){
+
+    }
     useEffect(()=>{
         onVariantCheck(answer)
     },
     [answer])
+
+    useEffect(()=>{
+        if(!isMultiple) return
+
+        const container = document.querySelector('.variants_scroll')
+        container.onwheel = e =>{
+            console.log(e)
+            if(e.deltaX) return
+            let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
+            console.log(e.target.scrollLeft)
+            container.scrollLeft +=delta*40
+        }
+        return ()=>{
+            container.onwheel = e =>{
+                return
+            }
+
+        }
+    })
     function onVariantPush(e){
         let newAnswer = [...answer]
         if(!isMultiple) newAnswer = []

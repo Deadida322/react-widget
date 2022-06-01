@@ -64,7 +64,7 @@ export default function Progress({onStepChange, onClose}){
                 {
                     step !== 0 && 
                     <div className="line_wrapper">
-                        <ProgressLine step={stepToDisplay} maxStep={stepToDisplay>maxStep?stepToDisplay:maxStep}/>
+                        <ProgressLine step={stepToDisplay} maxStep={stepToDisplay+1>maxStep?stepToDisplay:maxStep}/>
                     </div>
                 }
             
