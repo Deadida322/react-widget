@@ -19,10 +19,8 @@ export default function Variants({variants, isMultiple, onVariantCheck}){
 
         const container = document.querySelector('.variants_scroll')
         container.onwheel = e =>{
-            console.log(e)
             if(e.deltaX) return
             let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
-            console.log(e.target.scrollLeft)
             container.scrollLeft +=delta*40
         }
         return ()=>{
